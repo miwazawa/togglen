@@ -2,5 +2,12 @@
   "name": "togglen",
   "description": "ja⇔en",
   "version": "0.0.1",
-  "manifest_version": 3
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/search*"],
+      "css": ["styles.css"],
+      "js": ["index.js"]
+    }
+  ]
 }

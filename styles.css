@@ -1,0 +1,45 @@
+.togglen_label {
+  position: relative;
+  display: inline-flex;
+}
+
+.togglen_input {
+  display: none;
+}
+
+.togglen_appearance {
+  position: relative;
+  cursor: pointer;
+}
+
+.togglen_border {
+  position: relative;
+  width: 34px;
+  height: 18px;
+  margin: 10px 6px 0;
+  background-color: #fff;
+  border: 3px solid #eee;
+  border-radius: 40px;
+  box-sizing: border-box;
+  transition: 0.4s;
+}
+
+.togglen_circle {
+  position: absolute;
+  top: 13px;
+  left: 9px;
+  width: 13px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: gray;
+  transition: 0.4s;
+}
+
+.togglen_input:checked ~ .togglen_border {
+  border: 3px solid #4bd865;
+}
+
+.togglen_input:checked ~ .togglen_circle {
+  transform: translateX(100%);
+  background-color: #4bd865;
+}
