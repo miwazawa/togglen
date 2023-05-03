@@ -7,7 +7,7 @@
     {
       "matches": ["https://www.google.com/search*"],
       "css": ["styles.css"],
-      "js": ["index.js"]
+      "js": ["toggle.js"]
     }
   ]
 }
