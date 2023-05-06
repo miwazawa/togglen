@@ -9,5 +9,6 @@
       "css": ["styles.css"],
       "js": ["content_scripts.js"]
     }
-  ]
+  ],
+  "permissions": ["storage"]
 }
