@@ -6,9 +6,15 @@
   "content_scripts": [
     {
       "matches": ["https://www.google.com/search*"],
-      "css": ["styles.css"],
-      "js": ["content_scripts.js"]
+      "css": ["src/css/styles.css"],
+      "js": ["src/js/content_scripts.js", "src/js/content_main.js", "src/js/libs.js", "src/js/const.js"]
     }
   ],
-  "permissions": ["storage"]
+  "permissions": ["storage"],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/js/content_scripts.js", "src/js/content_main.js", "src/js/libs.js", "src/js/const.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
