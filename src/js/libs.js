@@ -14,11 +14,11 @@ export const setEn = () => {
 };
 
 /**
- * ローカルストレージに日本語設定であることを追加する
+ * ローカルストレージの設定を削除する
  */
-export const setJa = () => {
-  localStorage.setItem(langSettingKey, langSettingValues.ja);
-  localStorage.setItem(regionSettingKey, regionSettingValues.jp);
+export const deleteSetting = () => {
+  localStorage.removeItem(langSettingKey);
+  localStorage.removeItem(regionSettingKey);
 };
 
 /**
@@ -30,18 +30,6 @@ export const isEnLocalStorage = () => {
   return (
     langSetting === langSettingValues.en &&
     regionSetting === regionSettingValues.us
-  );
-};
-
-/**
- * ローカルストレージに日本語設定であることが追加されている
- */
-export const isJaLocalStorage = () => {
-  const { langSetting, regionSetting } = getLangAndRegionFromLocalStorage();
-
-  return (
-    langSetting === langSettingValues.ja &&
-    regionSetting === regionSettingValues.jp
   );
 };
 
@@ -82,12 +70,9 @@ export const updateDisplay = () => {
 
   // ローカルストレージの言語設定とクエリパラメータが一致していない時はリダイレクト
   if (
-    (isEnLocalStorage() &&
-      langSettingInUrl !== langSettingValues.en &&
-      regionSettingInUrl !== regionSettingValues.us) ||
-    (isJaLocalStorage() &&
-      langSettingInUrl !== langSettingValues.ja &&
-      regionSettingInUrl !== regionSettingValues.jp)
+    isEnLocalStorage() &&
+    langSettingInUrl !== langSettingValues.en &&
+    regionSettingInUrl !== regionSettingValues.us
   ) {
     search();
   }
@@ -97,16 +82,17 @@ export const updateDisplay = () => {
  * ローカルストレージの言語設定を取得してクエリパラメータに付与してリダイレクトする
  */
 export const search = () => {
-  const { langSetting, regionSetting } = getLangAndRegionFromLocalStorage();
-
-  if (!langSetting || !regionSetting) {
-    return;
-  }
-
   const url = new URL(window.location.href);
 
-  url.searchParams.set(langSettingKey, langSetting);
-  url.searchParams.set(regionSettingKey, regionSetting);
+  const { langSetting, regionSetting } = getLangAndRegionFromLocalStorage();
+
+  if (langSetting && regionSetting) {
+    url.searchParams.set(langSettingKey, langSetting);
+    url.searchParams.set(regionSettingKey, regionSetting);
+  } else {
+    url.searchParams.delete(langSettingKey);
+    url.searchParams.delete(regionSettingKey);
+  }
 
   location.href = url;
 };

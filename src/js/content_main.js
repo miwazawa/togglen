@@ -1,7 +1,7 @@
 import {
   updateDisplay,
   setEn,
-  setJa,
+  deleteSetting,
   isEnLocalStorage,
   search,
 } from "./libs.js";
@@ -42,14 +42,7 @@ export function main() {
   updateDisplay();
 
   input.addEventListener("click", () => {
-    if (input.checked) {
-      // English setting
-      setEn();
-      
-    } else {
-      // Japanese setting
-      setJa();
-    }
+    input.checked ? setEn() : deleteSetting();
 
     // redirect
     search();
